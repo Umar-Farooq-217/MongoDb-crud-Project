@@ -11,6 +11,7 @@
   "dependencies": {
     "firebase": "^10.12.3",
     "flowbite-react": "^0.10.1",
+    "mongoose": "^8.7.0",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest"
