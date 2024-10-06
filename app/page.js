@@ -1,7 +1,10 @@
 'use client'
 import { useState } from 'react';
 import './globals.css';
+ import dbConnect from '@/config/db';
 
+
+ dbConnect()
 export default function Home() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
