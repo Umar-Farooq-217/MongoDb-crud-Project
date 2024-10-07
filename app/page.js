@@ -13,6 +13,10 @@ export default function Home() {
   const [isUpdatingStudent, setIsUpdatingStudent] = useState(false);
   const [currentEmail, setCurrentEmail] = useState('');
 
+  const fetchData = async()=>{
+    
+  }
+
   const submitHandler = (e) => {
     e.preventDefault();
     if (!name || !email || !phone) {
