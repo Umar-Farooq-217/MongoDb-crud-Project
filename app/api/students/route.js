@@ -5,7 +5,6 @@ const { dbConnect } = require("@/config/db");
 
 
 
-dbConnect()
 export  const GET = async()=>{
 try {
     const data =await studentsModel.find();
