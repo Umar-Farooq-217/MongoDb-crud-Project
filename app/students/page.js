@@ -1,33 +1,30 @@
-import dbConnect from '@/config/db';
-import { studentsModel } from '@/model/students';
-import React from 'react';
-
-// Server-Side Rendering (SSR) function to fetch data before rendering the page
-export async function getServerSideProps() {
-  // Ensure database connection
-  await dbConnect();
-
-  // Fetch data from the students model
-  const data = await studentsModel.find({});
-
-  return {
-    props: {
-      students: JSON.parse(JSON.stringify(data)) // Avoid serialization issues
-    },
-  };
+import dbConnect from '@/config/db'
+import { studentsModel } from '@/model/students'
+import React from 'react'
+const fetchData = async()=>{
+ try {
+  let data = await studentsModel.find()
+  console.log('data ',data);
+  return data
+ } catch (error) {
+  console.log('error',error);
+  
+ }
+  
 }
 
-export default function StudentsPage({ students }) {
+export default async function page() {
+const data = await fetchData()
   return (
     <div>
-      <h1>Students</h1>
-      <ul>
-        {students.map((student) => (
-          <li key={student._id}>
-            {student.name} - {student.email} - {student.phone}
-          </li>
-        ))}
-      </ul>
+      <h1>students</h1>
+      {
+data.map((item,i)=>{
+  return(
+    <p key={i}>{item.name} - {item.email} - {item.phone}</p>
+  )
+})
+      }
     </div>
-  );
+  )
 }
