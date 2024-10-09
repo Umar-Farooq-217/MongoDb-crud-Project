@@ -18,3 +18,7 @@ try {
     
 }
 }
+
+export const POST  = async()=>{
+    
+}

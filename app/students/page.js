@@ -1,4 +1,5 @@
 import dbConnect from '@/config/db'
+dbConnect()
 import { studentsModel } from '@/model/students'
 import React from 'react'
 const fetchData = async()=>{
@@ -19,7 +20,7 @@ const data = await fetchData()
     <div>
       <h1>students</h1>
       {
-data.map((item,i)=>{
+data?.map((item,i)=>{
   return(
     <p key={i}>{item.name} - {item.email} - {item.phone}</p>
   )
