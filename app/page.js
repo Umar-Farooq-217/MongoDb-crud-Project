@@ -17,8 +17,38 @@ export default function Home() {
     
   }
 
-  const submitHandler = (e) => {
+  
+  const submitHandler = async(e) => {
     e.preventDefault();
+    try {
+      const myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+const raw = JSON.stringify({
+  "name": name,
+  "email": email,
+  "phone": phone
+});
+
+const requestOptions = {
+  method: "POST",
+  headers: myHeaders,
+  body: raw,
+  redirect: "follow"
+};
+
+const response = await fetch("http://localhost:3000/api/students", requestOptions)
+setEmail('')
+setName('')
+setPhone('')
+ alert('success')
+  .catch((error) => console.error(error));
+      
+    } catch (error) {
+      console.log('error',error);
+      
+    }
+
     if (!name || !email || !phone) {
       alert('Fill all fields');
       return;

@@ -2,6 +2,7 @@ import dbConnect from '@/config/db'
 dbConnect()
 import { studentsModel } from '@/model/students'
 import React from 'react'
+import DeleteBtn from '../components/deleteBtn/DeleteBtn'
 const fetchData = async()=>{
  try {
   let data = await studentsModel.find()
@@ -22,7 +23,13 @@ const data = await fetchData()
       {
 data?.map((item,i)=>{
   return(
-    <p key={i}>{item.name} - {item.email} - {item.phone}</p>
+    <div key={i} className="">
+
+      <p >{item._id} - 
+        {item.name} - {item.email} - {item.phone}</p>
+      <button>Update</button>
+      <DeleteBtn id={item._id}/>
+    </div>
   )
 })
       }

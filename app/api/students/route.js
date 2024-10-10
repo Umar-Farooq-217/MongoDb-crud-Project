@@ -25,6 +25,8 @@ try {
     if(body.name && body.email && body.phone){
         const data = await studentsModel(body)
         await data.save()
+        return NextResponse.json({ message: "successfully product created" })
+
     }
    return NextResponse.json({message:'all params are required'})
     
@@ -33,4 +35,23 @@ try {
    return NextResponse.json({message:'something went wrong'})
     
 }
+}
+
+export const DELETE = async(req)=>{
+    try {
+        const body =await req.json()
+        console.log('body',body);
+        if(body.id){
+            await studentsModel.deleteOne({
+                _id:body.id
+            })
+            return NextResponse.json('success')
+        }
+        
+        
+    } catch (error) {
+        console.log('error',error);
+        return NextResponse.json({message:'something went wrong'})
+    }
+    return NextResponse.json({message:'something went wrong'})
 }
