@@ -31,7 +31,7 @@ data?.map((item,i)=>{
         <p className=""> {item.name}</p>
         <p className="">{item.email}</p>
         <p className="">{item.phone}</p>
-      <UpdateBtn id={item._id} />
+      <UpdateBtn student={item} />
       <DeleteBtn id={item._id}/>
     </div>
   )

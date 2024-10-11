@@ -55,3 +55,17 @@ export const DELETE = async(req)=>{
     }
     return NextResponse.json({message:'something went wrong'})
 }
+
+export const PUT = async(req)=>{
+    try {
+        const body = await req.json()
+        if (body.name && body.email && body.phone) {
+            await studentsModel.updateOne({_id:body.id},body)
+            return NextResponse.json({message:'success'})
+        }
+    } catch (error) {
+        console.log('error',error);
+        return NextResponse.json({message:'oops'})
+        
+    }
+}

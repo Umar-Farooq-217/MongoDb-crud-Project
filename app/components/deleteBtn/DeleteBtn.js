@@ -1,9 +1,12 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function DeleteBtn(props) {
+  const [loading,setLoading] = useState(false)
+
     
     const deleteHandler = async()=>{
+      setLoading(true)
         const myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
 
@@ -20,11 +23,11 @@ const requestOptions = {
 
 const response = await fetch("http://localhost:3000/api/students", requestOptions)
  
-  .catch((error) => console.error(error));
+setLoading(false)
     }
   return (
     <div>
-      <button className='bg-red-500 px-3 py-2 rounded-xl text-white' onClick={deleteHandler}>Delete</button>
+      <button className='bg-red-500 px-3 py-2 rounded-xl text-white' onClick={deleteHandler}>{loading? 'loading...' : 'Delete'}</button>
     </div>
   )
 }
