@@ -47,7 +47,7 @@ await fetch("http://localhost:3000/api/students", requestOptions)
             {
               isUpdating  && (
 
-                <div className="bg-black  md:w-[50%] sm:w-[90%] mx-auto">
+                <div className="bg-black  mx-auto">
                   <h4 className='text-5xl text-center font-bold text-white '>Update Student</h4>
 
                   <input className='border-none outline-none my-2 rounded-lg px-3 py-1' type="text" value={name} onChange={(e)=>setName(e.target.value)} placeholder='Enter Name' /> <br />

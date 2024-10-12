@@ -5,6 +5,8 @@ import React from 'react'
 import DeleteBtn from '../components/deleteBtn/DeleteBtn'
 import UpdateBtn from '../components/updateBtn/UpdateBtn'
 import AddStudent from '../components/addStudent/AddStudent'
+import { TypeAnimation } from 'react-type-animation';
+
 const fetchData = async()=>{
  try {
   let data = await studentsModel.find()
@@ -21,9 +23,12 @@ export default async function page() {
 const data = await fetchData()
   return (
     <div>
-      <h1></h1>
+      
+    <h1 className='text-4xl font-bold font-serif text-center py-3'>Mongodb Database Practice</h1>
       <AddStudent/>
+      <h1 className='text-4xl font-bold font-serif text-center py-3'>Students List </h1>
       <div className="grid grid-cols-auto-fit gap-2 mx-4 pt-10 my-5">
+
       {
 data?.map((item,i)=>{
   return(

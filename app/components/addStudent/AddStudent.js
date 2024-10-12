@@ -9,13 +9,7 @@ export default function AddStudent() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
-//   const [students, setStudents] = useState([]);
-//   const [isUpdatingStudent, setIsUpdatingStudent] = useState(false);
-//   const [currentEmail, setCurrentEmail] = useState('');
 
-  const fetchData = async()=>{
-    
-  }
 
   
   const submitHandler = async(e) => {
@@ -41,8 +35,7 @@ const response = await fetch("http://localhost:3000/api/students", requestOption
 setEmail('')
 setName('')
 setPhone('')
- alert('success')
-  .catch((error) => console.error(error));
+
       
     } catch (error) {
       console.log('error',error);

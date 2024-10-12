@@ -1,190 +1,61 @@
-'use client'
-import { useState } from 'react';
-import './globals.css';
- import dbConnect from '@/config/db';
+import dbConnect from '@/config/db'
+dbConnect()
+import { studentsModel } from '@/model/students'
+import React from 'react'
+import DeleteBtn from './components/deleteBtn/DeleteBtn'
+import UpdateBtn from './components/updateBtn/UpdateBtn'
+import AddStudent from './components/addStudent/AddStudent'
 
 
- dbConnect()
-export default function Home() {
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [students, setStudents] = useState([]);
-  const [isUpdatingStudent, setIsUpdatingStudent] = useState(false);
-  const [currentEmail, setCurrentEmail] = useState('');
-
-  const fetchData = async()=>{
-    
-  }
-
+const fetchData = async()=>{
+ try {
+  let data = await studentsModel.find()
+  console.log('data ',data);
+  return data
+ } catch (error) {
+  console.log('error',error);
   
-  const submitHandler = async(e) => {
-    e.preventDefault();
-    try {
-      const myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
+ }
+  
+}
 
-const raw = JSON.stringify({
-  "name": name,
-  "email": email,
-  "phone": phone
-});
-
-const requestOptions = {
-  method: "POST",
-  headers: myHeaders,
-  body: raw,
-  redirect: "follow"
-};
-
-const response = await fetch("http://localhost:3000/api/students", requestOptions)
-setEmail('')
-setName('')
-setPhone('')
- alert('success')
-  .catch((error) => console.error(error));
-      
-    } catch (error) {
-      console.log('error',error);
-      
-    }
-
-    if (!name || !email || !phone) {
-      alert('Fill all fields');
-      return;
-    }
-
-    const newStudent = {
-      name,
-      email,
-      phone,
-    };
-
-    if (isUpdatingStudent) {
-      const updatedStudents = students.map((student) =>
-        student.email === currentEmail ? newStudent : student
-      );
-      setStudents(updatedStudents);
-      setIsUpdatingStudent(false);
-      setCurrentEmail('');
-    } else {
-      setStudents([...students, newStudent]);
-    }
-
-    setName('');
-    setEmail('');
-    setPhone('');
-  };
-
-  const updateHandler = (student) => {
-    setIsUpdatingStudent(true);
-    setCurrentEmail(student.email);
-    setName(student.name);
-    setEmail(student.email);
-    setPhone(student.phone);
-  };
-
-  const deleteHandler = (email) => {
-    console.log('Deleting student with email:', email);
-    const remainStudents = students.filter((student) => student.email !== email);
-    setStudents(remainStudents);
-  };
-
+export default async function Home() {
+const data = await fetchData()
   return (
     <div>
-      <div className='back bg-cover w-full '>
-        <h1 className='text-5xl text-gradient font-sans font-bold text-center'>
-          Student Admission Form
-        </h1>
+      
+    <h1 className='text-4xl font-bold font-serif text-center py-3'>Mongodb Database Practice</h1>
+      <AddStudent/>
+      <h1 className='text-4xl font-bold font-serif text-center py-3'>Students List </h1>
+      <div className="grid grid-cols-auto-fit gap-2 mx-4 pt-10 my-5">
 
-        <div className="lg:mx-64 md:mx-40 sm:mx-10">
-          <form onSubmit={submitHandler}>
-          <div className="mb-4">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="email"
-              >
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="email"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="phone"
-              >
-                Phone
-              </label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                onChange={(e) => setPhone(e.target.value)}
-                value={phone}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                required
-              />
-            </div>
+      {
+data?.map((item,i)=>{
+  return(
+    <div key={i} className=" bg-white rounded-xl shadow-xl pl-5 py-10 ">
+<h1 className="font-bold text-2xl">#{i + 1}</h1>
+   
+        <h1>
+                <span className="font-bold text-xl">Id: </span>{item._id}
+              </h1>
+        <h1>
+                <span className="font-bold text-xl">Name: </span>{item.name}
+              </h1>
+              <h1>
+                <span className="font-bold text-xl">Email: </span>{item.email}
+              </h1>
+              <h1>
+                <span className="font-bold text-xl">Phone: </span>{item.phone}
+              </h1>
+        <div className="flex justify-center my-2">
 
-            <div className="flex items-center justify-between">
-              <button
-                type="submit"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              >
-                {isUpdatingStudent ? 'Update' : 'Submit'}
-              </button>
-            </div>
-          </form>
+      <UpdateBtn student={item} />
+      <DeleteBtn id={item._id}/>
         </div>
-
-       
-          {students.map((student, i) => (
-            <div key={i} className="">
-              
-             
-              <div>
-                <button
-                  className="bg-green-600 rounded-xl hover:text-white font-bold mt-5 py-2 px-5"
-                  onClick={() => updateHandler(student)}
-                >
-                  Update
-                </button>
-                <button
-                  className="bg-red-600 rounded-xl hover:text-white font-bold mt-5 py-2 ml-2 px-5"
-                  onClick={() => deleteHandler(student.email)}
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          ))}
-       
-      </div>
     </div>
-  );
+  )
+})
+      }</div>
+    </div>
+  )
 }
