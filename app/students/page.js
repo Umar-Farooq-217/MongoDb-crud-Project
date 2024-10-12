@@ -5,7 +5,6 @@ import React from 'react'
 import DeleteBtn from '../components/deleteBtn/DeleteBtn'
 import UpdateBtn from '../components/updateBtn/UpdateBtn'
 import AddStudent from '../components/addStudent/AddStudent'
-import { TypeAnimation } from 'react-type-animation';
 
 const fetchData = async()=>{
  try {
