@@ -27,7 +27,7 @@ setLoading(false)
     }
   return (
     <div>
-      <button className='bg-red-500 px-3 py-2 rounded-xl text-white' onClick={deleteHandler}>{loading? 'loading...' : 'Delete'}</button>
+      <button className='bg-red-500 px-3 py-2 rounded-xl text-white ml-2' onClick={deleteHandler}>{loading? 'loading...' : 'Delete'}</button>
     </div>
   )
 }
