@@ -12,7 +12,7 @@
     "firebase": "^10.12.3",
     "flowbite-react": "^0.10.1",
     "mongodb": "^6.9.0",
-    "mongoose": "^8.7.0",
+    "mongoose": "^8.7.1",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",

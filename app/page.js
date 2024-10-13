@@ -1,7 +1,7 @@
+import React from 'react'
 import dbConnect from '@/config/db'
 dbConnect()
 import { studentsModel } from '@/model/students'
-import React from 'react'
 import DeleteBtn from './components/deleteBtn/DeleteBtn'
 import UpdateBtn from './components/updateBtn/UpdateBtn'
 import AddStudent from './components/addStudent/AddStudent'
@@ -9,7 +9,8 @@ import AddStudent from './components/addStudent/AddStudent'
 
 const fetchData = async()=>{
  try {
-  let data = await studentsModel.find()
+  
+  const data = await studentsModel.find()
   console.log('data ',data);
   return data
  } catch (error) {
