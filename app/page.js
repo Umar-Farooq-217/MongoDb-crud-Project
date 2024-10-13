@@ -5,6 +5,7 @@ import { studentsModel } from '@/model/students'
 import DeleteBtn from './components/deleteBtn/DeleteBtn'
 import UpdateBtn from './components/updateBtn/UpdateBtn'
 import AddStudent from './components/addStudent/AddStudent'
+import GetStudents from './components/getStudents/GetStudents'
 
 
 const fetchData = async()=>{
@@ -28,7 +29,8 @@ const data = await fetchData()
     <h1 className='text-4xl font-bold font-serif text-center py-3'>Mongodb Database Practice</h1>
       <AddStudent/>
       <h1 className='text-4xl font-bold font-serif text-center py-3'>Students List </h1>
-      <div className="grid grid-cols-auto-fit gap-2 mx-4 pt-10 my-5">
+      <GetStudents/>
+      {/* <div className="grid grid-cols-auto-fit gap-2 mx-4 pt-10 my-5">
 
       {
 data?.map((item,i)=>{
@@ -56,7 +58,7 @@ data?.map((item,i)=>{
     </div>
   )
 })
-      }</div>
+      }</div> */}
     </div>
   )
 }
