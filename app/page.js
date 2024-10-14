@@ -1,4 +1,5 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
 import dbConnect from '@/config/db'
 dbConnect()
 import { studentsModel } from '@/model/students'
@@ -8,29 +9,56 @@ import AddStudent from './components/addStudent/AddStudent'
 import GetStudents from './components/getStudents/GetStudents'
 
 
-const fetchData = async()=>{
- try {
-  
-  const data = await studentsModel.find()
-  console.log('data ',data);
-  return data
- } catch (error) {
-  console.log('error',error);
-  
- }
-  
-}
+
+
 
 export default async function Home() {
-const data = await fetchData()
+  const [data,setData]= useState([])
+
+  const fetchData = async()=>{
+    try {
+      let res = await fetch('http://localhost:3000/api/students')
+      const response =await res.json()
+      setData(response)
+      
+      
+    } catch (error) {
+      console.log('error',error);
+      
+    }
+    //  try {
+      
+    //   const data = await studentsModel.find()
+    //   console.log('data ',data);
+    //   return data
+    //  } catch (error) {
+  //   console.log('error',error);
+    
+  //  }
+  
+  }
+//  fetchData()
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      let res = await fetch('/api/students'); // Use relative URL for client-side fetch
+      const response = await res.json();
+      setData(response);
+    } catch (error) {
+      console.log('Error fetching data', error);
+    }
+  };
+
+  fetchData();
+}, []);
   return (
     <div>
       
     <h1 className='text-4xl font-bold font-serif text-center py-3'>Mongodb Database Practice</h1>
       <AddStudent/>
       <h1 className='text-4xl font-bold font-serif text-center py-3'>Students List </h1>
-      <GetStudents/>
-      {/* <div className="grid grid-cols-auto-fit gap-2 mx-4 pt-10 my-5">
+      {/* <GetStudents/> */}
+      <div className="grid grid-cols-auto-fit gap-2 mx-4 pt-10 my-5">
 
       {
 data?.map((item,i)=>{
@@ -58,7 +86,7 @@ data?.map((item,i)=>{
     </div>
   )
 })
-      }</div> */}
+      }</div>
     </div>
   )
 }
