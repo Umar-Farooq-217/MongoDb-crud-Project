@@ -5,7 +5,6 @@ import { studentsModel } from '@/model/students'
 import DeleteBtn from './components/deleteBtn/DeleteBtn'
 import UpdateBtn from './components/updateBtn/UpdateBtn'
 import AddStudent from './components/addStudent/AddStudent'
-import GetStudents from './components/getStudents/GetStudents'
 
 
 const fetchData = async()=>{
